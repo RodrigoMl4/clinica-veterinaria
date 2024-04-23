@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RestController
 @RequestMapping("/users")
 @Validated
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
   @Autowired
