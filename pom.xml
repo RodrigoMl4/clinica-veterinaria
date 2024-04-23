@@ -75,6 +75,12 @@
 			<version>2.3.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-hibernate5</artifactId>
+			<version>2.13.0</version>
+		</dependency>
+
 		<!-- Soporte de seguridad con Spring Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
