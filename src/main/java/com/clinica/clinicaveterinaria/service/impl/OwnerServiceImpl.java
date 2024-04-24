@@ -22,7 +22,6 @@ public class OwnerServiceImpl implements OwnerService {
     @Override
     public List<Owner> findAll() {
         List<Owner> owners = ownerRepository.findAll();
-        owners.forEach(owner -> Hibernate.initialize(owner.getPets()));
         return owners;
     }
 
@@ -30,7 +29,6 @@ public class OwnerServiceImpl implements OwnerService {
     public Owner findById(Integer id) {
         Owner owner = ownerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Owner not found for this id :: " + id));
-        Hibernate.initialize(owner.getPets());
         return owner;
     }
 
