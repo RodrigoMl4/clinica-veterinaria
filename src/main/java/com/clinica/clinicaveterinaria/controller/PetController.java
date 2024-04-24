@@ -9,6 +9,7 @@ import com.clinica.clinicaveterinaria.model.Pet;
 
 @RestController
 @RequestMapping("/api/pets")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PetController {
 
     @Autowired

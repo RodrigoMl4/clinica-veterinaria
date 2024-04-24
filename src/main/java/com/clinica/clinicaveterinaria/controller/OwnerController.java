@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/owners")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class OwnerController {
 
     @Autowired
