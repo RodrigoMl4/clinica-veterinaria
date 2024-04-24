@@ -29,8 +29,8 @@ public class ClinicaVeterinariaApplication {
 							UsernamePasswordAuthenticationFilter.class)
 					.authorizeRequests()
 					.antMatchers(HttpMethod.POST, "/user/login").permitAll()
-					.antMatchers(HttpMethod.POST, "/users").permitAll()
-					.anyRequest().authenticated();
+					.antMatchers(HttpMethod.POST, "/users").permitAll();
+					// .anyRequest().authenticated();
 		}
 	}
 }
