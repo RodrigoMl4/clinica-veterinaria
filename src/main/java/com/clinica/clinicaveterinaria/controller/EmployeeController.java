@@ -1,7 +1,7 @@
 package com.clinica.clinicaveterinaria.controller;
 
-import com.clinica.clinicaveterinaria.model.User;
-import com.clinica.clinicaveterinaria.service.UserService;
+import com.clinica.clinicaveterinaria.model.Employee;
+import com.clinica.clinicaveterinaria.service.EmployeeService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +16,22 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/users")
 @Validated
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-public class UserController {
+public class EmployeeController {
 
   @Autowired
-  private UserService userService;
+  private EmployeeService employeeService;
 
   @PostMapping
-  public ResponseEntity<String> createUser(@Valid @RequestBody final User user,
+  public ResponseEntity<String> createUser(@Valid @RequestBody final Employee employee,
       BindingResult result) {
     if (result.hasErrors()) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
           .body("Error: Los datos del usuario no son válidos.");
     }
     try {
-      User createdUser = userService.createUser(user);
+      Employee createdEmployee = employeeService.createUser(employee);
       return ResponseEntity.status(HttpStatus.CREATED)
-          .body("Usuario creado exitosamente con ID: " + createdUser.getId());
+          .body("Usuario creado exitosamente con ID: " + createdEmployee.getId());
     } catch (Exception e) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al crear el usuario.");
     }
@@ -40,30 +40,30 @@ public class UserController {
   @GetMapping("/{id}")
   public ResponseEntity<?> getUserById(@PathVariable final int id) {
     try {
-      User user = userService.getUserById(id)
+      Employee employee = employeeService.getUserById(id)
           .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
               "Usuario no encontrado."));
-      return ResponseEntity.ok(user);
+      return ResponseEntity.ok(employee);
     } catch (Exception e) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al obtener el usuario.");
     }
   }
 
   @GetMapping
-  public ResponseEntity<List<User>> getAllUsers() {
-    List<User> users = userService.getAllUsers();
-    return ResponseEntity.ok(users);
+  public ResponseEntity<List<Employee>> getAllUsers() {
+    List<Employee> employees = employeeService.getAllUsers();
+    return ResponseEntity.ok(employees);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<String> updateUser(@PathVariable final int id,
-      @RequestBody @Valid final User userDetails, BindingResult result) {
+      @RequestBody @Valid final Employee employeeDetails, BindingResult result) {
     if (result.hasErrors()) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
           .body("Error: Los datos del usuario no son válidos.");
     }
     try {
-      User updatedUser = userService.updateUser(id, userDetails);
+      Employee updatedEmployee = employeeService.updateUser(id, employeeDetails);
       return ResponseEntity.ok("Usuario actualizado exitosamente.");
     } catch (Exception e) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al actualizar el usuario.");
@@ -73,7 +73,7 @@ public class UserController {
   @DeleteMapping("/{id}")
   public ResponseEntity<String> deleteUser(@PathVariable final int id) {
     try {
-      userService.deleteUser(id);
+      employeeService.deleteUser(id);
       return ResponseEntity.ok("Usuario eliminado exitosamente.");
     } catch (Exception e) {
       throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al eliminar el usuario.");

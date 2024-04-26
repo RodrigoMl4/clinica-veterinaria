@@ -2,7 +2,7 @@ package com.clinica.clinicaveterinaria.controller;
 
 import com.clinica.clinicaveterinaria.model.LoginResponse;
 import com.clinica.clinicaveterinaria.security.TokenBlacklist;
-import com.clinica.clinicaveterinaria.service.UserService;
+import com.clinica.clinicaveterinaria.service.EmployeeService;
 import com.clinica.clinicaveterinaria.util.PropertiesUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -26,7 +26,7 @@ public class AuthController {
 
 
   @Autowired
-  private UserService userService;
+  private EmployeeService employeeService;
 
   private static final String SECRET_KEY = PropertiesUtil.getJwtSecretKey();
   private static final long TOKEN_VALIDITY = 3600000;
@@ -46,7 +46,7 @@ public class AuthController {
   public ResponseEntity<LoginResponse> login(
       @RequestParam("user") final String username,
       @RequestParam("password") final String pwd) {
-    return userService.validateUserLogin(username, pwd).map(user -> {
+    return employeeService.validateUserLogin(username, pwd).map(user -> {
       String token = getJwtToken(username, "" + user.getId());
       LoginResponse response = new LoginResponse();
       response.setId(user.getId());

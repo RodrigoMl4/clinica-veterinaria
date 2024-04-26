@@ -1,14 +1,16 @@
 package com.clinica.clinicaveterinaria.model;
 
-import javax.persistence.*;
 import lombok.Data;
+
+import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "users")
-public class User {
+@Table(name = "employees")
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "employee_id")
     private Integer id;
 
     @Column(unique = true, length = 255, nullable = false)
@@ -23,6 +25,6 @@ public class User {
     @Column(unique = true, length = 100, nullable = false)
     private String email;
 
-    @Column(length = 100, nullable = false)
+    @Column(name = "password_hash", length = 100, nullable = false)
     private String password;
 }

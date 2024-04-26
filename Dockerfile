@@ -4,7 +4,7 @@ COPY pom.xml .
 RUN mvn dependency:go-offline
 COPY src /app/src
 RUN mvn package -DskipTests
-# RUN mvn clean compile flyway:migrate package -DskipTests -Dflyway.url=$SPRING_DATASOURCE_URL -Dflyway.user=$SPRING_DATASOURCE_USERNAME -Dflyway.password=$SPRING_DATASOURCE_PASSWORD
+# RUN mvn clean compile flyway:migrate package -DskipTests -Dflyway.url=$SPRING_DATASOURCE_URL -Dflyway.employee=$SPRING_DATASOURCE_USERNAME -Dflyway.password=$SPRING_DATASOURCE_PASSWORD
 
 FROM openjdk:17-jdk-alpine
 WORKDIR /app
